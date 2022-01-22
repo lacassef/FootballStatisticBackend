@@ -232,7 +232,20 @@ data class FootballMatchById(
             var type: String? = null
         )
 
-        class Time
+        data class Time (
+            @JsonProperty("currentPeriodStartTimestamp")
+            var currentPeriodStartTimestamp: Int? = null,
+            @JsonProperty("extra")
+            var extra: Int? = null,
+            @JsonProperty("initial")
+            var initial: Int? = null,
+            @JsonProperty("injuryTime1")
+            var injuryTime1: Int? = null,
+            @JsonProperty("injuryTime2")
+            var injuryTime2: Int? = null,
+            @JsonProperty("max")
+            var max: Int? = null
+            )
 
         data class Tournament(
             @JsonProperty("category")

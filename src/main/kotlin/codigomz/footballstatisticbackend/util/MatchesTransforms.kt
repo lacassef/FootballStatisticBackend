@@ -18,7 +18,10 @@ fun FootballEventsByDate.toSchedules(): List<Schedule>? {
             status = it.status?.code?:0, date = getDayString(it.startTimestamp?:0),
             time = getTimeString(it.startTimestamp?:0),
             hasLines = it.hasEventPlayerStatistics?:false,
-            customId = it.customId?:""
+            customId = it.customId?:"", live = Schedule.Live(
+                periodStart = (it.time?.currentPeriodStartTimestamp?:0)*1000L,
+            period = getPeriod(it.status?.description?:"")), venue = Schedule.Venue(
+            )
         )
     }
 }
@@ -38,7 +41,10 @@ fun FootballLiveMatches.toSchedules(): List<Schedule>? {
             status = it.status?.code?:0, date = getDayString(it.startTimestamp?:0),
             time = getTimeString(it.startTimestamp?:0),
             hasLines = true,
-            customId = it.customId?:""
+            customId = it.customId?:"", live = Schedule.Live(
+                periodStart = (it.time?.currentPeriodStartTimestamp?:0)*1000L,
+                period = getPeriod(it.status?.description?:"")), venue = Schedule.Venue(
+            )
         )
     }
 }
@@ -55,7 +61,11 @@ fun FootballMatchById.toSchedule(): Schedule? {
                 id = it.tournament?.uniqueTournament?.id?:0, season = it.season?.id?:0),
             status = it.status?.code?:0, date = getDayString(it.startTimestamp?:0),
             time = getTimeString(it.startTimestamp?:0),
-            customId = it.customId?:""
+            customId = it.customId?:"", live = Schedule.Live(
+                periodStart = (it.time?.currentPeriodStartTimestamp?:0)*1000L,
+                period = getPeriod(it.status?.description?:"")), venue = Schedule.Venue(
+                city = it.venue?.city?.name?:"", stadium = it.venue?.stadium?.name?:""
+                )
         )
     }
 }
@@ -148,7 +158,10 @@ fun FootballMatchHead2Head.toSchedules(): List<Schedule>? {
                 status = it.status?.code?:0, date = getDayString(it.startTimestamp?:0),
                 time = getTimeString(it.startTimestamp?:0),
                 hasLines = it.hasEventPlayerStatistics?:false,
-                customId = it.customId?:""
+                customId = it.customId?:"", live = Schedule.Live(
+                    periodStart = (it.time?.currentPeriodStartTimestamp?:0)*1000L,
+                    period = getPeriod(it.status?.description?:"")), venue = Schedule.Venue(
+                )
             )
         }
 }

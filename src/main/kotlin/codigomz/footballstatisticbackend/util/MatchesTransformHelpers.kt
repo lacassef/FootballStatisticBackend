@@ -271,3 +271,9 @@ fun FootballMatchLineup.Away.Player.Statistics.toStatistics(): Player.Statistics
     return st
 }
 
+fun getPeriod(period: String) =
+    when(period){
+        "1st half" -> 0
+        "2nd half" -> 45
+        else -> -1
+    }
