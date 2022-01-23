@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/api/matches")
 class MatchesController(private val matches: MatchesService) {
+
     @GetMapping("schedules/{time}") fun getSchedules(
         @PathVariable time: Long
     ) = matches.getSchedules(time)
