@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/api/player") class PlayerController(private val player: PlayerService) {
 
-    @GetMapping("/{id}/{tournament}/{season}/performance") fun getPlayerPerformance(
+    @GetMapping("/{id}/{tournament}/{season}/statistics") fun getPlayerPerformance(
         @PathVariable id:Int, @PathVariable season: Int, @PathVariable tournament: Int
     ) = player.getPlayerStatistics(id, season, tournament)
 
