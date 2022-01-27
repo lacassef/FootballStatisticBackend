@@ -32,9 +32,9 @@ fun FootballLiveMatches.toSchedules(): List<Schedule>? {
     }?.map {
         Schedule(
             id= it.id?:0, home = Team(it.homeTeam?.name?:"", it.homeTeam?.shortName?:"",
-                it.homeScore?.current?:0, it.homeTeam?.id?:0),
+                it.homeScore?.current?:0, it.homeTeam?.id?:0, it.homeScore?.period1?:0),
             away = Team(it.awayTeam?.name?:"", it.awayTeam?.shortName?:"",
-                it.awayScore?.current?:0, it.awayTeam?.id?:0),
+                it.awayScore?.current?:0, it.awayTeam?.id?:0, it.awayScore?.period1?:0),
             tournament = Tournament(name = it.tournament?.uniqueTournament?.name?:"",
                 country = it.tournament?.uniqueTournament?.category?.name?:"",
                 id = it.tournament?.uniqueTournament?.id?:0 ),
@@ -53,9 +53,9 @@ fun FootballMatchById.toSchedule(): Schedule? {
     return this.event?.let {
         Schedule(
             id= it.id?:0, home = Team(it.homeTeam?.name?:"", it.homeTeam?.shortName?:"",
-                it.homeScore?.normaltime?:0, it.homeTeam?.id?:0),
+                it.homeScore?.normaltime?:0, it.homeTeam?.id?:0, it.homeScore?.period1?:0),
             away = Team(it.awayTeam?.name?:"", it.awayTeam?.shortName?:"",
-                it.awayScore?.normaltime?:0, it.awayTeam?.id?:0),
+                it.awayScore?.normaltime?:0, it.awayTeam?.id?:0, it.awayScore?.period1?:0),
             tournament = Tournament(name = it.tournament?.uniqueTournament?.name?:"",
                 country = it.tournament?.uniqueTournament?.category?.name?:"",
                 id = it.tournament?.uniqueTournament?.id?:0, season = it.season?.id?:0),
@@ -167,9 +167,9 @@ fun FootballMatchHead2Head.toSchedules(): List<Schedule>? {
         ?.map {
             Schedule(
                 id= it.id?:0, home = Team(it.homeTeam?.name?:"", it.homeTeam?.shortName?:"",
-                    it.homeScore?.normaltime?:0, it.homeTeam?.id?:0),
+                    it.homeScore?.normaltime?:0, it.homeTeam?.id?:0, it.homeScore?.period1?:0),
                 away = Team(it.awayTeam?.name?:"", it.awayTeam?.shortName?:"",
-                    it.awayScore?.normaltime?:0, it.awayTeam?.id?:0),
+                    it.awayScore?.normaltime?:0, it.awayTeam?.id?:0, it.awayScore?.period1?:0),
                 tournament = Tournament(name = it.tournament?.uniqueTournament?.name?:"",
                     country = it.tournament?.uniqueTournament?.category?.name?:"",
                     id = it.tournament?.uniqueTournament?.id?:0 ),
