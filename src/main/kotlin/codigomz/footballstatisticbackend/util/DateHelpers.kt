@@ -10,6 +10,14 @@ fun getDayString(it: Int): String {
     val year = calendar.get(Calendar.YEAR)
     return "${if(day<10) "0${day}" else day}/${if(month.toString().length<2) "0${month}" else month}/${year}"
 }
+fun getDayString(it: Long): String {
+    val date = Date(it)
+    val calendar = Calendar.Builder().setInstant(date).build()
+    val day = calendar.get(Calendar.DATE)
+    val month = calendar.get(Calendar.MONTH)+1
+    val year = calendar.get(Calendar.YEAR)
+    return "${if(day<10) "0${day}" else day}/${if(month.toString().length<2) "0${month}" else month}/${year}"
+}
 
 fun getTimeString(it: Int): String{
     val date = Date(it.toLong()*1000)

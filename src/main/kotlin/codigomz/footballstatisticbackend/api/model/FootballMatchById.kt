@@ -67,7 +67,11 @@ data class FootballMatchById(
         @JsonProperty("period1")
         var period1: Int? = null,
         @JsonProperty("period2")
-        var period2: Int? = null
+        var period2: Int? = null,
+        @JsonProperty("overtime")
+        var overtime: Int? = null,
+        @JsonProperty("penalties")
+        var penalties: Int? = null
         )
 
         data class AwayTeam(
@@ -128,7 +132,11 @@ data class FootballMatchById(
             @JsonProperty("period1")
             var period1: Int? = null,
             @JsonProperty("period2")
-            var period2: Int? = null
+            var period2: Int? = null,
+            @JsonProperty("overtime")
+            var overtime: Int? = null,
+            @JsonProperty("penalties")
+            var penalties: Int? = null
         )
 
         data class HomeTeam(

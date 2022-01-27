@@ -14,6 +14,9 @@ class MatchesController(private val matches: MatchesService) {
         @PathVariable time: Long
     ) = matches.getSchedules(time)
 
+    @GetMapping("schedules/next") fun getNextSchedules(
+    ) = matches.getNextSchedules()
+
     @GetMapping("/{id}") fun getSchedules(
         @PathVariable id: Int) = matches.getMatch(id)
 

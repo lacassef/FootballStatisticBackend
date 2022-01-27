@@ -274,6 +274,16 @@ fun FootballMatchLineup.Away.Player.Statistics.toStatistics(): Player.Statistics
 fun getPeriod(period: String) =
     when(period){
         "1st half" -> 0
+        "AP" -> -90
+        "AET" -> -90
         "2nd half" -> 45
+        "Ended" -> -90
+        "Halftime" -> -45
+        "1st extra" -> 90
+        "Extra time halftime" -> -105
+        "2nd extra" -> 105
+        "Awaiting penalties" -> -120
+        "Penalties" -> -999
+        "Awaiting extra time" -> -99
         else -> -1
     }

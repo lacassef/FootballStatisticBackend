@@ -14,6 +14,13 @@ fun FootballLeagueStandingsTotal.toTable(): Standings {
         row.position = it.position?:0
         row.wins = it.wins?:0
         row.points = it.points?:0
+        it.team?.let {
+            with(row.team){
+                name = it.name?:""
+                shortName = it.shortName?:""
+                id = it.id?:0
+            }
+        }
         row.promotion = it.promotion?.text?:""
         row.scored = it.scoresFor?:0
         row.scoredAgainst = it.scoresAgainst?:0
@@ -30,6 +37,13 @@ fun FootballLeagueStandingsHome.toTable(): Standings {
         row.losses = it.losses?:0
         row.position = it.position?:0
         row.wins = it.wins?:0
+        it.team?.let {
+            with(row.team){
+                name = it.name?:""
+                shortName = it.shortName?:""
+                id = it.id?:0
+            }
+        }
         row.points = it.points?:0
         row.promotion = it.promotion?.text?:""
         row.scored = it.scoresFor?:0
@@ -45,6 +59,13 @@ fun FootballLeagueStandingsAway.toTable(): Standings {
         val row = Standings.StandingRow()
         row.draws = it.draws?:0
         row.losses = it.losses?:0
+        it.team?.let {
+            with(row.team){
+                name = it.name?:""
+                shortName = it.shortName?:""
+                id = it.id?:0
+            }
+        }
         row.position = it.position?:0
         row.wins = it.wins?:0
         row.points = it.points?:0

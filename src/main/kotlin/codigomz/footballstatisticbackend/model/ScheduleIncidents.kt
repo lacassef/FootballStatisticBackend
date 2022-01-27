@@ -13,6 +13,10 @@ package codigomz.footballstatisticbackend.model
  * 8 - cartao amarelo
  * 9 - segundo cartao amarelo
  * 10 - cartao vermelho
+ * 11 - prolongamento terminado
+ * 12 - penalty terminado
+ * 13 - cobranca de penalidade falhado
+ * 14 - cobranca de penalidade acertado
  **/
 
 data class ScheduleIncidents(

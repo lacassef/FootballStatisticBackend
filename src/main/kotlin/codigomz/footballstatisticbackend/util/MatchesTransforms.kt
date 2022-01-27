@@ -32,13 +32,13 @@ fun FootballLiveMatches.toSchedules(): List<Schedule>? {
     }?.map {
         Schedule(
             id= it.id?:0, home = Team(it.homeTeam?.name?:"", it.homeTeam?.shortName?:"",
-                it.homeScore?.normaltime?:0, it.homeTeam?.id?:0),
+                it.homeScore?.current?:0, it.homeTeam?.id?:0),
             away = Team(it.awayTeam?.name?:"", it.awayTeam?.shortName?:"",
-                it.awayScore?.normaltime?:0, it.awayTeam?.id?:0),
+                it.awayScore?.current?:0, it.awayTeam?.id?:0),
             tournament = Tournament(name = it.tournament?.uniqueTournament?.name?:"",
                 country = it.tournament?.uniqueTournament?.category?.name?:"",
                 id = it.tournament?.uniqueTournament?.id?:0 ),
-            status = it.status?.code?:0, date = getDayString(it.startTimestamp?:0),
+            status = -1000, date = getDayString(it.startTimestamp?:0),
             time = getTimeString(it.startTimestamp?:0),
             hasLines = true,
             customId = it.customId?:"", live = Schedule.Live(
@@ -105,28 +105,46 @@ fun FootbalMatchIncidents.toIncidents(): List<ScheduleIncidents> {
         incidents.time = it.time?:0
         when(it.incidentType){
             "period" -> {
-                if(it.text == "HT") incidents.code = 3
-                else if(it.text == "FT") incidents.code = 4
+                when (it.text) {
+                    "HT" -> incidents.code = 3
+                    "FT" -> incidents.code = 4
+                    "ET" -> incidents.code = 11
+                    "PEN" -> incidents.code = 12
+                }
             }
             "substitution" -> {
                 incidents.code = 2
             }
             "card" -> {
-                if(it.incidentClass == "yellow"){
-                    incidents.code = 8
-                } else if (it.incidentClass == "red") {
-                    incidents.code = 10
-                } else if (it.incidentClass == "yellowRed"){
-                    incidents.code = 9
+                when (it.incidentClass) {
+                    "yellow" -> {
+                        incidents.code = 8
+                    }
+                    "red" -> {
+                        incidents.code = 10
+                    }
+                    "yellowRed" -> {
+                        incidents.code = 9
+                    }
                 }
             }
             "goal" -> {
-                if(it.incidentClass == "penalty"){
-                    incidents.code = 1
-                } else if (it.incidentClass == "regular") {
-                    incidents.code = 0
-                } else if (it.incidentClass == "ownGoal"){
-                    incidents.code = 7
+                when (it.incidentClass) {
+                    "penalty" -> {
+                        incidents.code = 1
+                    }
+                    "regular" -> {
+                        incidents.code = 0
+                    }
+                    "ownGoal" -> {
+                        incidents.code = 7
+                    }
+                }
+            }
+            "penaltyShootout" -> {
+                when(it.incidentClass){
+                    "missed" -> incidents.code = 13
+                    "scored" -> incidents.code = 14
                 }
             }
 
