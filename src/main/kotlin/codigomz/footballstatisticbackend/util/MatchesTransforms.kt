@@ -65,7 +65,8 @@ fun FootballMatchById.toSchedule(): Schedule? {
                 periodStart = (it.time?.currentPeriodStartTimestamp?:0)*1000L,
                 period = getPeriod(it.status?.description?:"")), venue = Schedule.Venue(
                 city = it.venue?.city?.name?:"", stadium = it.venue?.stadium?.name?:""
-                )
+                ),
+            hasLines = it.hasEventPlayerStatistics?:false
         )
     }
 }
@@ -150,7 +151,7 @@ fun FootbalMatchIncidents.toIncidents(): List<ScheduleIncidents> {
 
         }
         incidents
-    }.orEmpty().sortedBy { it.time }.reversed()
+    }.orEmpty()
 }
 
 fun FootballMatchGraph.toGraph(): ScheduleGraph {

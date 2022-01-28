@@ -28,6 +28,8 @@ data class FootballMatchById(
         var finalResultOnly: Boolean? = null,
         @JsonProperty("hasGlobalHighlights")
         var hasGlobalHighlights: Boolean? = null,
+        @JsonProperty("hasEventPlayerStatistics")
+        var hasEventPlayerStatistics: Boolean? = null,
         @JsonProperty("homeScore")
         var homeScore: HomeScore? = null,
         @JsonProperty("homeTeam")
