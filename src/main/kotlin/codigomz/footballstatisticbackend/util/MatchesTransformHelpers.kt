@@ -287,3 +287,12 @@ fun getPeriod(period: String) =
         "Awaiting extra time" -> -99
         else -> -1
     }
+
+fun getLinesNumber(formation: String): MutableList<Int> {
+    val lines: MutableList<Int> = mutableListOf()
+    lines.add(1)
+    for (i in formation.trim().filter{it != '-'}){
+        lines.add(Integer.valueOf(i.toString()))
+    }
+    return lines
+}

@@ -83,7 +83,9 @@ fun FootballMatchLineup.toFormation(): ScheduleLineup {
     val m = ScheduleLineup()
     m.confirmed = this.confirmed?:false
     m.home.formation = this.home?.formation?:""
+    m.home.lines = getLinesNumber(m.home.formation)
     m.away.formation = this.away?.formation?:""
+    m.away.lines = getLinesNumber(m.away.formation)
     m.home.players = this.home?.players?.filterNotNull()?.getHomePlayers()?: listOf()
     m.home.missingPlayers = this.home?.missingPlayers?.filterNotNull()?.getHomeMissingPlayers()?: listOf()
     m.away.players = this.away?.players?.filterNotNull()?.getAwayPlayers()?: listOf()
