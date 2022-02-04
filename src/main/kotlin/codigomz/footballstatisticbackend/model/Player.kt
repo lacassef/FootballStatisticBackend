@@ -3,7 +3,7 @@ package codigomz.footballstatisticbackend.model
 data class Player(
     var country: String = "",
     var dateOfBirth: String = "",
-    var name: String = "", var position: String = "",
+    var name: String = "", var position: String = "A",
     var shirtNumber: Int = 0, var substitute: Boolean = false, var missing: Boolean = false,
     var missingReason: Int = 0, var id: Int = 0, var shortName: String = "",
     var statistics: Statistics = Statistics(),

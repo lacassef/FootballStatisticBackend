@@ -138,7 +138,7 @@ fun List<FootballMatchLineup.Home.Player>.getHomePlayers(): List<Player> {
         pl.shortName = it.player?.shortName?:""
         pl.shirtNumber = it.shirtNumber?:0
         pl.substitute = it.substitute?:true
-        pl.position = it.position?:""
+        pl.position = it.position?:"A"
         pl.statistics = it.statistics?.toStatistics()?:Player.Statistics()
         pl
     }
@@ -191,7 +191,7 @@ fun List<FootballMatchLineup.Away.Player>.getAwayPlayers(): List<Player> {
         pl.name = it.player?.name ?: ""
         pl.shirtNumber = it.shirtNumber ?: 0
         pl.substitute = it.substitute ?: true
-        pl.position = it.position ?: ""
+        pl.position = it.position ?: "A"
         pl.statistics = it.statistics?.toStatistics()?:Player.Statistics()
         pl
     }

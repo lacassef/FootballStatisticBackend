@@ -9,7 +9,8 @@ import codigomz.footballstatisticbackend.model.Team
 fun FootballPlayerAttributeOverview.transform(playerPosition: String): PlayerAttributes {
     val pA = PlayerAttributes()
 
-    this.playerAttributeOverviews?.filterNotNull()?.filter { it.position == playerPosition }
+    this.playerAttributeOverviews?.filterNotNull()?.filter { if(playerPosition!="A")
+        it.position == playerPosition else true}
         ?.sortedBy { it.yearShift }?.firstOrNull()?.let { att ->
         with(pA.player){
              attacking = att. attacking  ?:0
@@ -24,7 +25,7 @@ fun FootballPlayerAttributeOverview.transform(playerPosition: String): PlayerAtt
              technical = att. technical  ?:0
         }
     }
-    this.averageAttributeOverviews?.filterNotNull()?.filter { it.position == playerPosition }
+    this.averageAttributeOverviews?.filterNotNull()
         ?.sortedBy { it.yearShift }?.firstOrNull()?.let { att ->
         with(pA.average){
             attacking = att. attacking  ?:0

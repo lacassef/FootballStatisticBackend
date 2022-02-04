@@ -40,6 +40,11 @@ interface Api{
     @GET("event/{id}/lineups")
     fun getMatchLineups(@Path("id") id: Int): Call<FootballMatchLineup>
 
+    //https://api.sofascore.com/api/v1/event/10060190/highlights
+    @GET("event/{id}/highlights")
+    fun getMatchHighlights(@Path("id") id: Int): Call<FootballMatchHighlights>
+
+
     //https://api.sofascore.com/api/v1/event/9540945/statistics
     @GET("event/{id}/statistics")
     fun getMatchStatistics(@Path("id") id: Int): Call<FootballMatchStatistics>

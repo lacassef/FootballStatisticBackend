@@ -10,9 +10,12 @@ fun getPeriodsGraph(teamId: Int): BettingPeriods {
         it.tournament?.uniqueTournament?.hasEventPlayerStatistics == true
     }
     val pF = PeriodsFinale()
+    val pFAgg = PeriodsFinale()
     val pG = PeriodsGraph()
     val goalP =GoalPeriods()
     val goalM = mutableListOf<Int>()
+    val goalPAgg =GoalPeriods()
+    val goalMAgg = mutableListOf<Int>()
     lastMatches?.mapNotNull { event ->
         event.id?.let {
             val g = Sofascore.getApi().getMatchGraph(it).execute().body()
@@ -49,9 +52,14 @@ fun getPeriodsGraph(teamId: Int): BettingPeriods {
     }
     lastMatches?.mapNotNull { event ->
         event.id?.let { id ->
-            goalM.addAll(Sofascore.getApi().getMatchIncidents(id).execute().body()
-                ?.toIncidents()?.filter {
+            val inc = Sofascore.getApi().getMatchIncidents(id).execute().body()
+                ?.toIncidents()
+            goalM.addAll(inc?.filter {
                 (it.isHome == (teamId == event.homeTeam?.id)) and ((it.code == 0)||(it.code == 1)) }
+                ?.map { it.time }.orEmpty())
+            goalMAgg.addAll(inc?.filter {
+                    (!(it.isHome == (teamId == event.homeTeam?.id))) and
+                            ((it.code == 0)||(it.code == 1)) }
                 ?.map { it.time }.orEmpty())
         }
     }.orEmpty()
@@ -73,11 +81,29 @@ fun getPeriodsGraph(teamId: Int): BettingPeriods {
     goalP.pSix = goalM.count {
         (it > 75).and(it<=90)
     }
+    goalPAgg.pOne = goalMAgg.count {
+        (it > 0).and(it<=15)
+    }
+    goalPAgg.pTwo = goalMAgg.count {
+        (it > 15).and(it<=30)
+    }
+    goalPAgg.pThree = goalMAgg.count {
+        (it > 30).and(it<=45)
+    }
+    goalPAgg.pFour = goalMAgg.count {
+        (it > 45).and(it<=60)
+    }
+    goalPAgg.pFive = goalMAgg.count {
+        (it > 60).and(it<=75)
+    }
+    goalPAgg.pSix = goalMAgg.count {
+        (it > 75).and(it<=90)
+    }
     pG.pOne = pF.pOne.filter { !it.isNaN() }.average()
     pG.pTwo = pF.pTwo.filter { !it.isNaN() }.average()
     pG.pThree = pF.pThree.filter { !it.isNaN() }.average()
     pG.pFour = pF.pFour.filter { !it.isNaN() }.average()
     pG.pFive = pF.pFive.filter { !it.isNaN() }.average()
     pG.pSix = pF.pSix.filter { !it.isNaN() }.average()
-    return BettingPeriods(graph = pG, goals = goalP)
+    return BettingPeriods(graph = pG, goals = goalP, goalsAgg = goalPAgg)
 }
