@@ -135,6 +135,7 @@ fun List<FootballMatchLineup.Home.Player>.getHomePlayers(): List<Player> {
         val pl = Player()
         pl.id = it.player?.id?:0
         pl.name = it.player?.name?:""
+        pl.avgRating = it.avgRating?:0.0
         pl.shortName = it.player?.shortName?:""
         pl.shirtNumber = it.shirtNumber?:0
         pl.substitute = it.substitute?:true
@@ -177,7 +178,7 @@ fun List<FootballMatchLineup.Home.MissingPlayer>.getHomeMissingPlayers(): List<P
         pl.id = it.player?.id?:0
         pl.name = it.player?.name?:""
         pl.shortName = it.player?.shortName?:""
-        if(it.type == "doubtful") pl.missingReason = 99 else pl.missingReason = it.reason?:0
+        if(it.type == "doubtful") pl.missingReason = 99 else pl.missingReason = it.reason?:-1
         pl.missing = true
         pl
     }
@@ -187,6 +188,7 @@ fun List<FootballMatchLineup.Away.Player>.getAwayPlayers(): List<Player> {
     return this.map {
         val pl = Player()
         pl.id = it.player?.id?:0
+        pl.avgRating = it.avgRating?:0.0
         pl.shortName = it.player?.shortName?:""
         pl.name = it.player?.name ?: ""
         pl.shirtNumber = it.shirtNumber ?: 0

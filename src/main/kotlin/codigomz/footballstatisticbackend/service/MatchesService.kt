@@ -39,5 +39,6 @@ class MatchesService{
         Sofascore.getApi().getMatchGraph(id).execute().body()?.toGraph()
 
     fun getHead2Head(id: String) = Sofascore.getApi().getMatchHead2Head(id).execute().
-    body()?.toSchedules().orEmpty()
+    body()?.toSchedules().orEmpty().filter {((it.status == 0) or (it.status == 100)
+            or (it.status == 120) or (it.status == 110))  }
 }

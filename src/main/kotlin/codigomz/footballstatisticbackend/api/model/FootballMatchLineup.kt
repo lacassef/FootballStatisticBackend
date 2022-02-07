@@ -89,6 +89,8 @@ data class FootballMatchLineup(
             var jerseyNumber: String? = null,
             @JsonProperty("player")
             var player: Player? = null,
+            @JsonProperty("avgRating")
+            var avgRating: Double? = null,
             @JsonProperty("position")
             var position: String? = null,
             @JsonProperty("shirtNumber")
@@ -285,6 +287,8 @@ data class FootballMatchLineup(
             var jerseyNumber: String? = null,
             @JsonProperty("player")
             var player: Player? = null,
+            @JsonProperty("avgRating")
+            var avgRating: Double? = null,
             @JsonProperty("position")
             var position: String? = null,
             @JsonProperty("shirtNumber")
